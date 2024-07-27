@@ -99,18 +99,22 @@ struct PlayerFeature {
     private func handleAudioControl(state: inout State,
                                     action: AudioControlAction) -> Effect<Action> {
         
+        let currentTime = state.currentTime
+        
         switch action {
-        case .previousChapter:
-            
-            return .none
-        case .goBackward:
-            return .none
         case .play:
-            
             state.player.play()
             state.isPlaying = state.player.isPlaying
             return .none
+        case .goBackward:
+            return .run { send in
+                await send(.timeChanged(currentTime - 5))
+            }
         case .goForward:
+            return .run { send in
+                await send(.timeChanged(currentTime + 10))
+            }
+        case .previousChapter:
             return .none
         case .nextChapter:
             return .none
