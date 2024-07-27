@@ -19,6 +19,8 @@ struct ContentView: View {
             BookCoverView(store: store)
 
             TimeSliderView(store: store)
+            
+            PlayingButtonsView(store: store)
         }
         .padding(.horizontal, 20)
         .safeAreaPadding(.top, 0)

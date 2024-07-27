@@ -14,6 +14,8 @@ struct PlayerFeature {
     @ObservableState
     struct State: Equatable {
 
+        var isPlaying = false
+
         var chapterNumber = 1
         let totalChapters = 4
         let title = "Harry Potter"
@@ -25,6 +27,7 @@ struct PlayerFeature {
     enum Action {
         
         case timeChanged(TimeInterval)
+        case audioControlButtonTapped(AudioControlAction)
     }
     
     var body: some ReducerOf<Self> {
@@ -35,6 +38,14 @@ struct PlayerFeature {
             case let .timeChanged(time):
                 
                 state.currentTime = time
+                return .none
+            case let .audioControlButtonTapped(action):
+                
+                if action == .play {
+                    state.isPlaying.toggle()
+                } else {
+                    print("\(action) tapped")
+                }
                 return .none
             }
         }
@@ -47,8 +58,6 @@ extension PlayerFeature {
     static var previewStore: StoreOf<PlayerFeature> {
         
         Store(initialState: PlayerFeature.State(),
-              reducer: {
-            PlayerFeature()
-        })
+              reducer: { PlayerFeature() })
     }
 }
