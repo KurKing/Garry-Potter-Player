@@ -51,6 +51,7 @@ struct PlayerFeature {
     
     enum Action {
         
+        case updateTime
         case timeChanged(TimeInterval)
         case speedButtonTapped
         case audioControlButtonTapped(AudioControlAction)
@@ -68,18 +69,50 @@ struct PlayerFeature {
                 return .none
             case let .audioControlButtonTapped(action):
                 
-                if action == .play {
-                    state.player.play()
-                    state.isPlaying = state.player.isPlaying
+                if action == .play, !state.isPlaying {
+                    return .concatenate(
+                        .run { @MainActor send in
+                            while true {
+                                try await self.clock.sleep(for: .seconds(1))
+                                send(.updateTime)
+                            }
+                        }.cancellable(id: "onTapPlay", cancelInFlight: true),
+                        
+                        self.handleAudioControl(state: &state, action: action)
+                    )
                 } else {
-                    print("\(action) tapped")
+                    return handleAudioControl(state: &state, action: action)
                 }
-                return .none
             case .speedButtonTapped:
                 
                 state.currentSpeedIndex = (state.currentSpeedIndex + 1) % state.speeds.count
                 return .none
+            case .updateTime:
+                
+                state.currentTime = state.player.currentTime
+                return .none
             }
+        }
+    }
+    
+    private func handleAudioControl(state: inout State,
+                                    action: AudioControlAction) -> Effect<Action> {
+        
+        switch action {
+        case .previousChapter:
+            
+            return .none
+        case .goBackward:
+            return .none
+        case .play:
+            
+            state.player.play()
+            state.isPlaying = state.player.isPlaying
+            return .none
+        case .goForward:
+            return .none
+        case .nextChapter:
+            return .none
         }
     }
 }

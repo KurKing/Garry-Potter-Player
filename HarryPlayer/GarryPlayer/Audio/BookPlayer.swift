@@ -59,9 +59,3 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
         // play next chapter
     }
 }
-
-fileprivate extension AVAudioPlayer {
-    var progress: Double {
-        currentTime / duration
-    }
-}

@@ -17,19 +17,24 @@ struct TimeSliderView: View {
         HStack {
             
             Text(store.currentTime.formattedString)
+                .frame(width: 50, alignment: .center)
             
             WithViewStore(store, observe: { $0 }) { viewStore in
                 
-                Slider(
-                    value: viewStore.binding(
-                        get: { $0.currentTime },
-                        send: PlayerFeature.Action.timeChanged
-                    ),
-                    in: 0...viewStore.totalTime
-                )
+                withAnimation(.linear) {
+                    
+                    Slider(
+                        value: viewStore.binding(
+                            get: { $0.currentTime },
+                            send: PlayerFeature.Action.timeChanged
+                        ),
+                        in: 0...viewStore.totalTime
+                    )
+                }
             }
             
             Text(store.totalTime.formattedString)
+                .frame(width: 50, alignment: .center)
         }
     }
 }
