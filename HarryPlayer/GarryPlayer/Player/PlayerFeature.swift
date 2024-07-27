@@ -27,12 +27,12 @@ struct PlayerFeature {
         
         // Speed
         var currentSpeed: Double = 1.0
-        fileprivate var currentSpeedIndex = 1 {
+        fileprivate var currentSpeedIndex = 2 {
             didSet {
                 currentSpeed = speeds[currentSpeedIndex]
             }
         }
-        fileprivate let speeds = [0.5, 1.0, 2.0, 2.5]
+        fileprivate let speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
         
         init(player: any BookPlayer) {
             
@@ -86,6 +86,7 @@ struct PlayerFeature {
             case .speedButtonTapped:
                 
                 state.currentSpeedIndex = (state.currentSpeedIndex + 1) % state.speeds.count
+                state.player.set(speed: state.currentSpeed)
                 return .none
             case .updateTime:
                 

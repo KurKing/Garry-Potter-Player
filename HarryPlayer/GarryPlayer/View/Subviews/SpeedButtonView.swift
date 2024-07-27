@@ -18,14 +18,25 @@ struct SpeedButtonView: View {
             store.send(.speedButtonTapped)
         }) {
             
-            Text(String(format: "Speed %.1fx", store.currentSpeed))
+            Text(speedString)
                 .font(.title3)
                 .foregroundStyle(Color(uiColor: .darkGray))
-                .frame(width: 120, alignment: .center)
+                .frame(width: 150, alignment: .center)
                 .padding(.vertical)
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
         }
+    }
+    
+    private var speedString: String {
+        
+        // %.2f for speed like 0.75
+        var string = String(format: "Speed %.2f", store.currentSpeed)
+        
+        // handle cases when %.1f actually needed
+        if string.last == "0" { string.removeLast() }
+        
+        return string + "x"
     }
 }
 

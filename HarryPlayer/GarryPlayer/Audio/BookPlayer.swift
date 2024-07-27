@@ -15,7 +15,10 @@ protocol BookPlayer: Equatable {
     var currentTime: TimeInterval { get set }
     var duration: TimeInterval { get }
     
+    /// Play or pause audio
     func play()
+    
+    func set(speed: Double)
 }
 
 class AVBookPlayer: NSObject, BookPlayer {
@@ -42,16 +45,24 @@ class AVBookPlayer: NSObject, BookPlayer {
             player = try? AVAudioPlayer(contentsOf: url)
         }
         
+        player?.enableRate = true
+        
         super.init()
     }
     
-    // Play or pause audio
     func play() {
         
         if isPlaying {
             player?.pause()
         } else {
             player?.play()
+        }
+    }
+    
+    func set(speed: Double) {
+        
+        Task(priority: .high) {
+            player?.rate = Float(speed)
         }
     }
     
