@@ -109,6 +109,7 @@ struct PlayerFeature {
                 state.wasPlayingOnTimeUpdate = state.isPlaying
                 state.player.pause()
                 state.isPlaying = state.player.isPlaying
+                
                 return .none
             case .timeStopUpdating:
                                 

@@ -14,21 +14,26 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack(alignment: .center, spacing: 24) {
+        ZStack {
             
-            BookCoverView(store: store)
-
-            TimeSliderView(store: store)
+            Color.white
+                .ignoresSafeArea()
             
-            SpeedButtonView(store: store)
-            
-            PlayingButtonsView(store: store)
+            VStack(alignment: .center, spacing: 24) {
+                
+                BookCoverView(store: store)
+                
+                TimeSliderView(store: store)
+                
+                SpeedButtonView(store: store)
+                
+                PlayingButtonsView(store: store)
+            }
+            .padding(.horizontal, 20)
+            .safeAreaPadding(.top, 0)
+            .safeAreaPadding(.bottom, 20)
+            .frame(minWidth: 0, maxWidth: 650)
         }
-        .padding(.horizontal, 20)
-        .safeAreaPadding(.top, 0)
-        .safeAreaPadding(.bottom, 20)
-        .background(Color.white)
-        .frame(minWidth: 0, maxWidth: 650)
     }
 }
 

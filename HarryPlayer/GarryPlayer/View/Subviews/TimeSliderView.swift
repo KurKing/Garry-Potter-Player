@@ -18,7 +18,7 @@ struct TimeSliderView: View {
             
             Text(store.currentTime.formattedString)
                 .foregroundStyle(.black)
-                .font(.body)
+                .font(.footnote)
                 .frame(width: 50, alignment: .center)
             
             WithViewStore(store, observe: { $0 }) { viewStore in
@@ -31,7 +31,6 @@ struct TimeSliderView: View {
                             send: PlayerFeature.Action.timeChanged
                         ),
                         in: 0...viewStore.totalTime) { isEditing in
-                            print(isEditing)
                             if isEditing {
                                 viewStore.send(PlayerFeature.Action.timeStartUpdating)
                             } else {
@@ -43,7 +42,7 @@ struct TimeSliderView: View {
             
             Text(store.totalTime.formattedString)
                 .foregroundStyle(.black)
-                .font(.body)
+                .font(.footnote)
                 .frame(width: 50, alignment: .center)
         }
     }
