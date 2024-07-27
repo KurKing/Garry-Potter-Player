@@ -14,7 +14,17 @@ struct ContentView: View {
     
     var body: some View {
         
-        BookCoverView(store: store)
+        VStack(alignment: .center, spacing: 20) {
+            
+            BookCoverView(store: store)
+
+            TimeSliderView(store: store)
+        }
+        .padding(.horizontal, 20)
+        .safeAreaPadding(.top, 0)
+        .safeAreaPadding(.bottom, 20)
+        .background(Color.white)
+        .frame(minWidth: 0, maxWidth: 650)
     }
 }
 

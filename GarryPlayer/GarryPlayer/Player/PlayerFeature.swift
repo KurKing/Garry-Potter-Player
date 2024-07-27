@@ -17,10 +17,20 @@ struct PlayerFeature {
         var chapterNumber = 1
         let totalChapters = 4
         let title = "Harry Potter"
+        
+        var currentTime: TimeInterval = 0
+        let totalTime: TimeInterval = 120
     }
     
     enum Action {
+        
+        case timeChanged(Double)
     }
+    
+//    var body: some ReducerOf<Self> {
+//        
+//        
+//    }
 }
 
 extension PlayerFeature {
