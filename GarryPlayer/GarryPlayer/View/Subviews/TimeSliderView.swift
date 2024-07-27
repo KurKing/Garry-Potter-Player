@@ -18,7 +18,16 @@ struct TimeSliderView: View {
             
             Text(store.currentTime.formattedString)
             
-            Slider(value: .constant(0.3))
+            WithViewStore(store, observe: { $0 }) { viewStore in
+                
+                Slider(
+                    value: viewStore.binding(
+                        get: { $0.currentTime },
+                        send: PlayerFeature.Action.timeChanged
+                    ),
+                    in: 0...viewStore.totalTime
+                )
+            }
             
             Text(store.totalTime.formattedString)
         }

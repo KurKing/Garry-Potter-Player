@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct PlayerFeature {
     
     @ObservableState
-    struct State {
+    struct State: Equatable {
 
         var chapterNumber = 1
         let totalChapters = 4
@@ -24,13 +24,21 @@ struct PlayerFeature {
     
     enum Action {
         
-        case timeChanged(Double)
+        case timeChanged(TimeInterval)
     }
     
-//    var body: some ReducerOf<Self> {
-//        
-//        
-//    }
+    var body: some ReducerOf<Self> {
+        
+        Reduce { state, action in
+                
+            switch action {
+            case let .timeChanged(time):
+                
+                state.currentTime = time
+                return .none
+            }
+        }
+    }
 }
 
 extension PlayerFeature {
