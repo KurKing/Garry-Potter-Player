@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct GarryPlayerApp: App {
+    
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
+            
+            ContentView(store: Store(initialState: PlayerFeature.State(),
+                                     reducer: { PlayerFeature() }))
         }
     }
 }
