@@ -19,3 +19,5 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 - [AVFoundation](https://developer.apple.com/av-foundation/)
 - [The Composable Architecture (TCA)](https://github.com/pointfreeco/swift-composable-architecture) by Point-Free
+
+P.S. I am sorry for the typo Garry -> Harry.
