@@ -19,7 +19,7 @@ struct PlayerFeature {
         var isPlaying = false
 
         var chapterNumber = 1
-        var totalChapters = 1
+        let totalChapters = 4
         let title = "Harry Potter"
         
         var currentTime: TimeInterval = 0
@@ -39,7 +39,6 @@ struct PlayerFeature {
             _player = Shared(wrappedValue: player, .inMemory("book.player"))
             
             totalTime = player.duration
-            totalChapters = player.filesAmount
         }
         
         // Equatable

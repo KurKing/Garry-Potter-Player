@@ -10,7 +10,6 @@ import AVFoundation
 
 protocol BookPlayer: Equatable {
     
-    var filesAmount: Int { get }
     var isPlaying: Bool { get }
     
     var currentTime: TimeInterval { get set }
@@ -21,7 +20,6 @@ protocol BookPlayer: Equatable {
 
 class AVBookPlayer: NSObject, BookPlayer {
     
-    var filesAmount: Int { fileNames.count }
     var isPlaying: Bool { player?.isPlaying ?? false }
     var duration: TimeInterval { player?.duration ?? 0.0 }
     var currentTime: TimeInterval {
@@ -36,13 +34,10 @@ class AVBookPlayer: NSObject, BookPlayer {
     }
     
     private var player: AVAudioPlayer?
-    private let fileNames: [String]
     
     override init() {
         
-        fileNames = AudioFilesNamesProvider().get
-        
-        if let fileName = fileNames.first,
+        if let fileName = AudioFilesNamesProvider().get.first,
            let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
             player = try? AVAudioPlayer(contentsOf: url)
         }
