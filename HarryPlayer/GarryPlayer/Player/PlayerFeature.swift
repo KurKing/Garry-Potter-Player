@@ -66,6 +66,7 @@ struct PlayerFeature {
             case let .timeChanged(time):
                 
                 state.currentTime = time
+                state.player.currentTime = time
                 return .none
             case let .audioControlButtonTapped(action):
                 
