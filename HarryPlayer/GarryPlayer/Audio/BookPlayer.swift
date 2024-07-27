@@ -15,8 +15,8 @@ protocol BookPlayer: Equatable {
     var currentTime: TimeInterval { get set }
     var duration: TimeInterval { get }
     
-    /// Play or pause audio
     func play()
+    func pause()
     
     func set(speed: Double)
 }
@@ -30,9 +30,7 @@ class AVBookPlayer: NSObject, BookPlayer {
             player?.currentTime ?? 0.0
         }
         set {
-            Task(priority: .high) {
-                await set(time: newValue)
-            }
+            player?.currentTime = newValue
         }
     }
     
@@ -47,28 +45,30 @@ class AVBookPlayer: NSObject, BookPlayer {
         
         player?.enableRate = true
         
+        let session = AVAudioSession.sharedInstance()
+        
+        if let _ = try? session.setCategory(.playback) { } else {
+            if let _ = try? session.overrideOutputAudioPort(.speaker) { } else {
+                try? session.setActive(true)
+            }
+        }
+        
         super.init()
     }
     
     func play() {
-        
-        if isPlaying {
-            player?.pause()
-        } else {
-            player?.play()
-        }
+        player?.play()
+    }
+    
+    func pause() {
+        player?.pause()
     }
     
     func set(speed: Double) {
-        
-        Task(priority: .high) {
-            player?.rate = Float(speed)
-        }
+        player?.rate = Float(speed)
     }
     
-    private func set(time: TimeInterval) async {
-        player?.currentTime = time
-    }
+    
 }
 
 // MARK: - AVAudioPlayerDelegate

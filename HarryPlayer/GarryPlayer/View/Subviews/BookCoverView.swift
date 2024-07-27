@@ -29,6 +29,7 @@ struct BookCoverView: View {
             
             Text(store.title)
                 .font(.headline)
+                .foregroundStyle(.black)
         }
         .padding(.horizontal)
     }
