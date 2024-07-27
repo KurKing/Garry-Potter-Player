@@ -18,7 +18,7 @@ struct PlayingButtonsView: View {
             
             Spacer()
             
-            ForEach(AudioControlAction.allCases, id: \.self) { action in
+            ForEach(AudioControlAction.availableFeatures, id: \.self) { action in
                 
                 let size: CGFloat = action == .play ? 40.0 : 35.0
                 
