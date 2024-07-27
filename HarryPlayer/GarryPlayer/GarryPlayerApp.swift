@@ -14,9 +14,7 @@ struct GarryPlayerApp: App {
     var body: some Scene {
         
         WindowGroup {
-            
-            ContentView(store: Store(initialState: PlayerFeature.State(),
-                                     reducer: { PlayerFeature() }))
+            ContentView(store: PlayerFeature.storeInstance)
         }
     }
 }
