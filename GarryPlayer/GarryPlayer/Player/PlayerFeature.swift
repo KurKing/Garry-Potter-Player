@@ -22,11 +22,20 @@ struct PlayerFeature {
         
         var currentTime: TimeInterval = 0
         let totalTime: TimeInterval = 120
+        
+        var currentSpeed: Double = 1.0
+        fileprivate var currentSpeedIndex = 1 {
+            didSet {
+                currentSpeed = speeds[currentSpeedIndex]
+            }
+        }
+        fileprivate let speeds = [0.5, 1.0, 2.0, 2.5]
     }
     
     enum Action {
         
         case timeChanged(TimeInterval)
+        case speedButtonTapped
         case audioControlButtonTapped(AudioControlAction)
     }
     
@@ -47,6 +56,10 @@ struct PlayerFeature {
                     print("\(action) tapped")
                 }
                 return .none
+            case .speedButtonTapped:
+                
+                state.currentSpeedIndex = (state.currentSpeedIndex + 1) % state.speeds.count
+                return.none
             }
         }
     }

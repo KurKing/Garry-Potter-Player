@@ -14,11 +14,13 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .center, spacing: 24) {
             
             BookCoverView(store: store)
 
             TimeSliderView(store: store)
+            
+            SpeedButtonView(store: store)
             
             PlayingButtonsView(store: store)
         }
