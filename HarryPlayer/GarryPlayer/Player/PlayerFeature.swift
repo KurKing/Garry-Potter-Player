@@ -17,6 +17,8 @@ struct PlayerFeature {
         @Shared fileprivate var player: any BookPlayer
 
         var isPlaying = false
+        fileprivate var isUpdatingTime = false
+        fileprivate var wasPlayingOnTimeUpdate = false
 
         var chapterNumber = 1
         let totalChapters = 1
@@ -51,7 +53,10 @@ struct PlayerFeature {
     enum Action {
         
         case updateTime
+        case timeStartUpdating
         case timeChanged(TimeInterval)
+        case timeStopUpdating
+        case forceTimeUpdate(TimeInterval)
         case speedButtonTapped
         case audioControlButtonTapped(AudioControlAction)
     }
@@ -63,6 +68,10 @@ struct PlayerFeature {
                 
             switch action {
             case let .timeChanged(time):
+                
+                state.currentTime = time
+                return .none
+            case let .forceTimeUpdate(time):
                 
                 state.currentTime = time
                 state.player.currentTime = time
@@ -90,7 +99,29 @@ struct PlayerFeature {
                 return .none
             case .updateTime:
                 
-                state.currentTime = state.player.currentTime
+                if !state.isUpdatingTime, state.isPlaying {
+                    state.currentTime = state.player.currentTime
+                }
+                return .none
+            case .timeStartUpdating:
+                
+                state.isUpdatingTime = true
+                state.wasPlayingOnTimeUpdate = state.isPlaying
+                state.player.pause()
+                state.isPlaying = state.player.isPlaying
+                
+                return .none
+            case .timeStopUpdating:
+                                
+                state.player.currentTime = state.currentTime
+                
+                if state.wasPlayingOnTimeUpdate {
+                    state.player.play()
+                    state.isPlaying = state.player.isPlaying
+                }
+                
+                state.isUpdatingTime = false
+
                 return .none
             }
         }
@@ -103,16 +134,20 @@ struct PlayerFeature {
         
         switch action {
         case .play:
-            state.player.play()
+            if state.isPlaying {
+                state.player.pause()
+            } else {
+                state.player.play()
+            }
             state.isPlaying = state.player.isPlaying
             return .none
         case .goBackward:
             return .run { send in
-                await send(.timeChanged(currentTime - 5))
+                await send(.forceTimeUpdate(currentTime - 5))
             }
         case .goForward:
             return .run { send in
-                await send(.timeChanged(currentTime + 10))
+                await send(.forceTimeUpdate(currentTime + 10))
             }
         case .previousChapter:
             return .none

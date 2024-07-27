@@ -17,6 +17,8 @@ struct TimeSliderView: View {
         HStack {
             
             Text(store.currentTime.formattedString)
+                .foregroundStyle(.black)
+                .font(.footnote)
                 .frame(width: 50, alignment: .center)
             
             WithViewStore(store, observe: { $0 }) { viewStore in
@@ -28,12 +30,19 @@ struct TimeSliderView: View {
                             get: { $0.currentTime },
                             send: PlayerFeature.Action.timeChanged
                         ),
-                        in: 0...viewStore.totalTime
-                    )
+                        in: 0...viewStore.totalTime) { isEditing in
+                            if isEditing {
+                                viewStore.send(PlayerFeature.Action.timeStartUpdating)
+                            } else {
+                                viewStore.send(PlayerFeature.Action.timeStopUpdating)
+                            }
+                        }
                 }
             }
             
             Text(store.totalTime.formattedString)
+                .foregroundStyle(.black)
+                .font(.footnote)
                 .frame(width: 50, alignment: .center)
         }
     }
