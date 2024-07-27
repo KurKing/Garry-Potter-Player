@@ -19,7 +19,7 @@ struct PlayerFeature {
         var isPlaying = false
 
         var chapterNumber = 1
-        let totalChapters = 4
+        let totalChapters = 1
         let title = "Harry Potter"
         
         var currentTime: TimeInterval = 0
