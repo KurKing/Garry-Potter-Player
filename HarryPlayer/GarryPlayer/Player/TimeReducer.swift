@@ -30,6 +30,14 @@ struct TimeReducer {
             totalTime = player.duration
         }
         
+        init(player: any BookPlayer, currentTime: TimeInterval) {
+            
+            self.player = player
+            totalTime = player.duration
+            
+            self.currentTime = currentTime
+        }
+        
         // Equatable
         static func == (lhs: TimeReducer.State, rhs: TimeReducer.State) -> Bool {
             lhs.currentTime == rhs.currentTime
