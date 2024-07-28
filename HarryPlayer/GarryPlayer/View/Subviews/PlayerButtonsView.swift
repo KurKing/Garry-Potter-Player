@@ -51,6 +51,14 @@ struct PlayingButtonsView: View {
             return false
         }
         
+        if action == .goBackward, !store.state.timeState.isTimeBackButtonAvailable {
+            return false
+        }
+        
+        if action == .goForward, !store.state.timeState.isTimeForwardButtonAvailable {
+            return false
+        }
+        
         return true
     }
 }
