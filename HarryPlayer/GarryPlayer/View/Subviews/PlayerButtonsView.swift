@@ -21,6 +21,7 @@ struct PlayingButtonsView: View {
             ForEach(AudioControlAction.availableFeatures, id: \.self) { action in
                 
                 let size: CGFloat = action == .play ? 40.0 : 35.0
+                let isAvailable = isAvailable(action: action)
                 
                 Button(action: {
                     store.send(.audioControlButtonTapped(action))
@@ -32,10 +33,25 @@ struct PlayingButtonsView: View {
                         .foregroundStyle(.black)
                         .frame(width: size, height: size, alignment: .center)
                 }
+                .disabled(!isAvailable)
+                .opacity(isAvailable ? 1.0 : 0.4)
                 
                 Spacer()
             }
         }
+    }
+    
+    private func isAvailable(action: AudioControlAction) -> Bool {
+        
+        if action == .previousChapter, !store.state.isPreviousChapterAvailable {
+            return false
+        }
+        
+        if action == .nextChapter, !store.state.isNextChapterAvailable {
+            return false
+        }
+        
+        return true
     }
 }
 
