@@ -15,7 +15,7 @@ struct SpeedButtonView: View {
     var body: some View {
         
         Button(action: {
-            store.send(.speedButtonTapped)
+            store.send(.speed(.speedButtonTapped))
         }) {
             
             Text(speedString)
@@ -31,7 +31,7 @@ struct SpeedButtonView: View {
     private var speedString: String {
         
         // %.2f for speed like 0.75
-        var string = String(format: "Speed %.2f", store.currentSpeed)
+        var string = String(format: "Speed %.2f", store.speedState.currentSpeed)
         
         // handle cases when %.1f actually needed
         if string.last == "0" { string.removeLast() }

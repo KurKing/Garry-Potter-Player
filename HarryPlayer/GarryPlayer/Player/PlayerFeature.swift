@@ -27,20 +27,14 @@ struct PlayerFeature {
         var currentTime: TimeInterval = 0
         var totalTime: TimeInterval = 0
         
-        // Speed
-        var currentSpeed: Double = 1.0
-        fileprivate var currentSpeedIndex = 2 {
-            didSet {
-                currentSpeed = speeds[currentSpeedIndex]
-            }
-        }
-        fileprivate let speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
+        var speedState: SpeedReducer.State
         
         init(player: any BookPlayer) {
             
             _player = Shared(wrappedValue: player, .inMemory("book.player"))
             
             totalTime = player.duration
+            speedState = SpeedReducer.State()
         }
         
         // Equatable
@@ -57,72 +51,81 @@ struct PlayerFeature {
         case timeChanged(TimeInterval)
         case timeStopUpdating
         case forceTimeUpdate(TimeInterval)
-        case speedButtonTapped
         case audioControlButtonTapped(AudioControlAction)
+        
+        case speed(SpeedReducer.Action)
     }
     
     @Dependency(\.continuousClock) var clock
     var body: some ReducerOf<Self> {
         
-        Reduce { state, action in
+        CombineReducers {
+            
+            Scope(state: \.speedState, action: \.speed) {
+                SpeedReducer()
+            }
+            
+            Reduce { state, action in
                 
-            switch action {
-            case let .timeChanged(time):
-                
-                state.currentTime = time
-                return .none
-            case let .forceTimeUpdate(time):
-                
-                state.currentTime = time
-                state.player.currentTime = time
-                return .none
-            case let .audioControlButtonTapped(action):
-                
-                if action == .play, !state.isPlaying {
-                    return .concatenate(
-                        .run { @MainActor send in
-                            while true {
-                                try await self.clock.sleep(for: .seconds(1))
-                                send(.updateTime)
-                            }
-                        }.cancellable(id: "onTapPlay", cancelInFlight: true),
-                        
-                        self.handleAudioControl(state: &state, action: action)
-                    )
-                } else {
-                    return handleAudioControl(state: &state, action: action)
-                }
-            case .speedButtonTapped:
-                
-                state.currentSpeedIndex = (state.currentSpeedIndex + 1) % state.speeds.count
-                state.player.set(speed: state.currentSpeed)
-                return .none
-            case .updateTime:
-                
-                if !state.isUpdatingTime, state.isPlaying {
-                    state.currentTime = state.player.currentTime
-                }
-                return .none
-            case .timeStartUpdating:
-                
-                state.isUpdatingTime = true
-                state.wasPlayingOnTimeUpdate = state.isPlaying
-                state.player.pause()
-                state.isPlaying = state.player.isPlaying
-                
-                return .none
-            case .timeStopUpdating:
-                                
-                state.player.currentTime = state.currentTime
-                
-                if state.wasPlayingOnTimeUpdate {
-                    state.player.play()
+                switch action {
+                case let .timeChanged(time):
+                    
+                    state.currentTime = time
+                    return .none
+                case let .forceTimeUpdate(time):
+                    
+                    state.currentTime = time
+                    state.player.currentTime = time
+                    return .none
+                case let .audioControlButtonTapped(action):
+                    
+                    if action == .play, !state.isPlaying {
+                        return .concatenate(
+                            .run { @MainActor send in
+                                while true {
+                                    try await self.clock.sleep(for: .seconds(1))
+                                    send(.updateTime)
+                                }
+                            }.cancellable(id: "onTapPlay", cancelInFlight: true),
+                            
+                            self.handleAudioControl(state: &state, action: action)
+                        )
+                    } else {
+                        return handleAudioControl(state: &state, action: action)
+                    }
+                case let .speed(.setSpeed(speed)):
+                    
+                    state.player.speed = speed
+                    return .none
+                case .updateTime:
+                    
+                    if !state.isUpdatingTime, state.isPlaying {
+                        state.currentTime = state.player.currentTime
+                    }
+                    return .none
+                case .timeStartUpdating:
+                    
+                    state.isUpdatingTime = true
+                    state.wasPlayingOnTimeUpdate = state.isPlaying
+                    state.player.pause()
                     state.isPlaying = state.player.isPlaying
+                    
+                    return .none
+                case .timeStopUpdating:
+                    
+                    state.player.currentTime = state.currentTime
+                    
+                    if state.wasPlayingOnTimeUpdate {
+                        state.player.play()
+                        state.isPlaying = state.player.isPlaying
+                    }
+                    
+                    state.isUpdatingTime = false
+                    
+                    return .none
+                default:
+                    return .none
                 }
-                
-                state.isUpdatingTime = false
-
-                return .none
             }
         }
     }
@@ -161,7 +164,16 @@ extension PlayerFeature {
     
     static var storeInstance: StoreOf<PlayerFeature> {
         
-        Store(initialState: PlayerFeature.State(player: AVBookPlayer()),
+        var player: (any BookPlayer)?
+        
+        if let fileName = AudioFilesNamesProvider().get.first,
+           let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
+            player = AVBookPlayer(with: url)
+        } else {
+            fatalError("No mp3 files found.")
+        }
+        
+        return Store(initialState: PlayerFeature.State(player: player!),
               reducer: { PlayerFeature() })
     }
     

@@ -14,17 +14,19 @@ protocol BookPlayer: Equatable {
     
     var currentTime: TimeInterval { get set }
     var duration: TimeInterval { get }
+    var speed: Double { get set }
+    
+    var onFinish: (() -> ())? { get set }
     
     func play()
     func pause()
-    
-    func set(speed: Double)
 }
 
 class AVBookPlayer: NSObject, BookPlayer {
-    
+        
     var isPlaying: Bool { player?.isPlaying ?? false }
     var duration: TimeInterval { player?.duration ?? 0.0 }
+    
     var currentTime: TimeInterval {
         get {
             player?.currentTime ?? 0.0
@@ -34,26 +36,27 @@ class AVBookPlayer: NSObject, BookPlayer {
         }
     }
     
+    var speed: Double {
+        get {
+            Double(player?.rate ?? 1.0)
+        }
+        set {
+            player?.rate = Float(newValue)
+        }
+    }
+    
+    var onFinish: (() -> ())?
+    
     private var player: AVAudioPlayer?
     
-    override init() {
+    init(with url: URL) {
         
-        if let fileName = AudioFilesNamesProvider().get.first,
-           let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
-            player = try? AVAudioPlayer(contentsOf: url)
-        }
-        
+        player = try? AVAudioPlayer(contentsOf: url)
         player?.enableRate = true
         
-        let session = AVAudioSession.sharedInstance()
-        
-        if let _ = try? session.setCategory(.playback) { } else {
-            if let _ = try? session.overrideOutputAudioPort(.speaker) { } else {
-                try? session.setActive(true)
-            }
-        }
-        
         super.init()
+        
+        fixSpeakers()
     }
     
     func play() {
@@ -64,11 +67,16 @@ class AVBookPlayer: NSObject, BookPlayer {
         player?.pause()
     }
     
-    func set(speed: Double) {
-        player?.rate = Float(speed)
+    private func fixSpeakers() {
+        
+        let session = AVAudioSession.sharedInstance()
+
+        if let _ = try? session.setCategory(.playback) { } else {
+            if let _ = try? session.overrideOutputAudioPort(.speaker) { } else {
+                try? session.setActive(true)
+            }
+        }
     }
-    
-    
 }
 
 // MARK: - AVAudioPlayerDelegate
@@ -77,5 +85,6 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, 
                                      successfully flag: Bool) {
         player.stop()
+        onFinish?()
     }
 }
