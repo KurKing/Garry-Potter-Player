@@ -43,8 +43,9 @@ struct PlayerReducer {
     
     enum Action {
         
-        case audioControlButtonTapped(AudioControlAction)
+        case isPlayingUpdated
         
+        case audioControlButtonTapped(AudioControlAction)
         case time(TimeReducer.Action)
         case speed(SpeedReducer.Action)
     }
@@ -67,9 +68,12 @@ struct PlayerReducer {
                 switch action {
                 case let .audioControlButtonTapped(action):
                     return handleAudioControl(state: &state, action: action)
+                case .isPlayingUpdated:
+                    state.isPlaying = state.player.isPlaying
                 default:
-                    return .none
+                    break
                 }
+                return .none
             }
         }
     }
@@ -141,8 +145,14 @@ extension PlayerReducer {
             fatalError("No mp3 files found.")
         }
         
-        return Store(initialState: PlayerReducer.State(player: player!),
-                     reducer: { PlayerReducer() })
+        let store = Store(initialState: PlayerReducer.State(player: player!),
+                          reducer: { PlayerReducer() })
+        
+        player?.isPlayingUpdated = { [weak store] in
+            store?.send(.isPlayingUpdated)
+        }
+        
+        return store
     }
     
     /// Only for SwiftUI #Preview

@@ -87,10 +87,6 @@ struct TimeReducer {
             }
         }
     }
-    
-    private func handleTimeStartUpdating(state: inout State) -> Effect<Action> {
-        .none
-    }
 }
 
 // MARK: - Preview

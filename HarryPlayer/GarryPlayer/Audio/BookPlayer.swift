@@ -16,6 +16,8 @@ protocol BookPlayer: Equatable, AnyObject {
     var currentTime: TimeInterval { get set }
     var duration: TimeInterval { get }
     var speed: Double { get set }
+    
+    var isPlayingUpdated: (() -> ())? { get set }
         
     func play()
     func pause()
@@ -44,6 +46,8 @@ class AVBookPlayer: NSObject, BookPlayer {
         }
     }
         
+    var isPlayingUpdated: (() -> ())?
+
     private let player: AVAudioPlayer?
     
     init(with url: URL) {
@@ -59,17 +63,13 @@ class AVBookPlayer: NSObject, BookPlayer {
     func play() {
         
         player?.play()
-        updateIsPlaying()
+        isPlayingUpdated?()
     }
     
     func pause() {
         
         player?.pause()
-        updateIsPlaying()
-    }
-    
-    private func updateIsPlaying() {
-//        isPlaying = player?.isPlaying ?? false
+        isPlayingUpdated?()
     }
     
     private func fixSpeakers() {
@@ -90,7 +90,7 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, 
                                      successfully flag: Bool) {
         player.stop()
-        updateIsPlaying()
+        isPlayingUpdated?()
     }
 }
 
