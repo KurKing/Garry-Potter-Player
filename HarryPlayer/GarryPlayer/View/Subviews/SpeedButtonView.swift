@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct SpeedButtonView: View {
     
-    let store: StoreOf<PlayerFeature>
+    let store: StoreOf<SpeedReducer>
     
     var body: some View {
         
@@ -41,5 +41,5 @@ struct SpeedButtonView: View {
 }
 
 #Preview {
-    SpeedButtonView(store: PlayerFeature.previewStore)
+    SpeedButtonView(store: SpeedReducer.previewStore)
 }

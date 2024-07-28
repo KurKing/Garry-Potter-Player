@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct BookCoverView: View {
     
-    let store: StoreOf<PlayerFeature>
+    let store: StoreOf<PlayerReducer>
     
     var body: some View {
         
@@ -36,5 +36,5 @@ struct BookCoverView: View {
 }
 
 #Preview {
-    BookCoverView(store: PlayerFeature.previewStore)
+    BookCoverView(store: PlayerReducer.previewStore)
 }
