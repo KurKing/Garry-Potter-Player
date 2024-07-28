@@ -109,6 +109,7 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, 
                                      successfully flag: Bool) {
+        player.pause()
         isPlayingUpdated?()
         onFinish?()
     }
