@@ -10,12 +10,12 @@ import ComposableArchitecture
 
 struct SpeedButtonView: View {
     
-    let store: StoreOf<PlayerReducer>
+    let store: StoreOf<SpeedReducer>
     
     var body: some View {
         
         Button(action: {
-            store.send(.speed(.speedButtonTapped))
+            store.send(.speedButtonTapped)
         }) {
             
             Text(speedString)
@@ -31,7 +31,7 @@ struct SpeedButtonView: View {
     private var speedString: String {
         
         // %.2f for speed like 0.75
-        var string = String(format: "Speed %.2f", store.speedState.currentSpeed)
+        var string = String(format: "Speed %.2f", store.currentSpeed)
         
         // handle cases when %.1f actually needed
         if string.last == "0" { string.removeLast() }
@@ -41,5 +41,5 @@ struct SpeedButtonView: View {
 }
 
 #Preview {
-    SpeedButtonView(store: PlayerReducer.previewStore)
+    SpeedButtonView(store: SpeedReducer.previewStore)
 }

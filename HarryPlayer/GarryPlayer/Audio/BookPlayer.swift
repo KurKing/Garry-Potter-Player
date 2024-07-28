@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import Combine
 
 protocol BookPlayer: Equatable, AnyObject {
     
@@ -15,9 +16,7 @@ protocol BookPlayer: Equatable, AnyObject {
     var currentTime: TimeInterval { get set }
     var duration: TimeInterval { get }
     var speed: Double { get set }
-    
-    var onFinish: (() -> ())? { get set }
-    
+        
     func play()
     func pause()
 }
@@ -44,10 +43,8 @@ class AVBookPlayer: NSObject, BookPlayer {
             player?.rate = Float(newValue)
         }
     }
-    
-    var onFinish: (() -> ())?
-    
-    private var player: AVAudioPlayer?
+        
+    private let player: AVAudioPlayer?
     
     init(with url: URL) {
         
@@ -60,11 +57,19 @@ class AVBookPlayer: NSObject, BookPlayer {
     }
     
     func play() {
+        
         player?.play()
+        updateIsPlaying()
     }
     
     func pause() {
+        
         player?.pause()
+        updateIsPlaying()
+    }
+    
+    private func updateIsPlaying() {
+//        isPlaying = player?.isPlaying ?? false
     }
     
     private func fixSpeakers() {
@@ -85,6 +90,21 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, 
                                      successfully flag: Bool) {
         player.stop()
-        onFinish?()
+        updateIsPlaying()
+    }
+}
+
+// MARK: - Preview
+extension AVBookPlayer {
+    
+    /// Only for SwiftUI #Preview
+    static var previewInstance: any BookPlayer {
+        
+        if let fileName = AudioFilesNamesProvider().get.first,
+           let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
+            return AVBookPlayer(with: url)
+        }
+            
+        fatalError("No mp3 files found.")
     }
 }

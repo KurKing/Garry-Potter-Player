@@ -23,10 +23,10 @@ struct ContentView: View {
                 
                 BookCoverView(store: store)
                 
-                TimeSliderView(store: store)
+                TimeSliderView(store: store.scope(state: \.timeState, action: \.time))
                 
-                SpeedButtonView(store: store)
-                
+                SpeedButtonView(store: store.scope(state: \.speedState, action: \.speed))
+
                 PlayingButtonsView(store: store)
             }
             .padding(.horizontal, 20)

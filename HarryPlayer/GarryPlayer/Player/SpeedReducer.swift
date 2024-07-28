@@ -56,3 +56,14 @@ struct SpeedReducer {
         }
     }
 }
+
+// MARK: - Preview
+extension SpeedReducer {
+    
+    /// Only for SwiftUI #Preview
+    static var previewStore: StoreOf<SpeedReducer> {
+        
+        return Store(initialState: SpeedReducer.State(player: AVBookPlayer.previewInstance),
+                     reducer: { SpeedReducer() })
+    }
+}

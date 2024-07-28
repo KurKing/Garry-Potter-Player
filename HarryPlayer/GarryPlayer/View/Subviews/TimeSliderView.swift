@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct TimeSliderView: View {
     
-    let store: StoreOf<PlayerReducer>
+    let store: StoreOf<TimeReducer>
     
     var body: some View {
         
@@ -28,13 +28,13 @@ struct TimeSliderView: View {
                     Slider(
                         value: viewStore.binding(
                             get: { $0.currentTime },
-                            send: PlayerReducer.Action.timeChanged
+                            send: { .timeChanged($0) }
                         ),
                         in: 0...viewStore.totalTime) { isEditing in
                             if isEditing {
-                                viewStore.send(PlayerReducer.Action.timeStartUpdating)
+                                viewStore.send(.timeStartUpdating)
                             } else {
-                                viewStore.send(PlayerReducer.Action.timeStopUpdating)
+                                viewStore.send(.timeStopUpdating)
                             }
                         }
                 }
@@ -60,5 +60,5 @@ fileprivate extension TimeInterval {
 }
 
 #Preview {
-    TimeSliderView(store: PlayerReducer.previewStore)
+    TimeSliderView(store: TimeReducer.previewStore)
 }
