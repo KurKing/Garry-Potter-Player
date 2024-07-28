@@ -18,9 +18,12 @@ protocol BookPlayer: Equatable, AnyObject {
     var speed: Double { get set }
     
     var isPlayingUpdated: (() -> ())? { get set }
+    var onFinish: (() -> ())? { get set }
         
     func play()
     func pause()
+    
+    func setFile(with url: URL)
 }
 
 class AVBookPlayer: NSObject, BookPlayer {
@@ -47,8 +50,9 @@ class AVBookPlayer: NSObject, BookPlayer {
     }
         
     var isPlayingUpdated: (() -> ())?
+    var onFinish: (() -> ())?
 
-    private let player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     init(with url: URL) {
         
@@ -72,6 +76,19 @@ class AVBookPlayer: NSObject, BookPlayer {
         isPlayingUpdated?()
     }
     
+    func setFile(with url: URL) {
+        
+        let tmpSpeed = speed
+        
+        player = nil
+        player = try? AVAudioPlayer(contentsOf: url)
+        player?.enableRate = true
+        
+        fixSpeakers()
+        
+        speed = tmpSpeed
+    }
+    
     private func fixSpeakers() {
         
         let session = AVAudioSession.sharedInstance()
@@ -91,6 +108,7 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
                                      successfully flag: Bool) {
         player.stop()
         isPlayingUpdated?()
+        onFinish?()
     }
 }
 

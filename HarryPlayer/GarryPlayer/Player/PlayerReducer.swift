@@ -18,17 +18,22 @@ struct PlayerReducer {
         var isPlaying = false
         
         var chapterNumber = 1
-        let totalChapters = 1
+        var totalChapters: Int { chaptersNames.count }
+        var isPreviousChapterAvailable: Bool { chapterNumber > 1 }
+        var isNextChapterAvailable: Bool { chapterNumber < totalChapters }
+        
         let title = "Harry Potter"
 
         var speedState: SpeedReducer.State
         var timeState: TimeReducer.State
         
         fileprivate var player: any BookPlayer
+        fileprivate var chaptersNames: [String]
                 
-        init(player: any BookPlayer) {
+        init(player: any BookPlayer, chaptersNames: [String]) {
             
             self.player = player
+            self.chaptersNames = chaptersNames
                         
             speedState = SpeedReducer.State(player: player)
             timeState = TimeReducer.State(player: player)
@@ -121,9 +126,51 @@ private extension PlayerReducer {
                 await send(.time(.forceTimeUpdateOn(10)))
             }
         case .previousChapter:
-            return .none
+            
+            return .concatenate(
+                handlePreviousChapterAction(state: &state),
+                .run(operation: { send in
+                    await send(.time(.forceTimeRefresh))
+                }))
         case .nextChapter:
-            return .none
+            
+            return .concatenate(
+                handleNextChapterAction(state: &state),
+                .run(operation: { send in
+                    await send(.time(.forceTimeRefresh))
+                }))
+        }
+    }
+    
+    // MARK: - Chapters
+    private func handlePreviousChapterAction(state: inout State) -> Effect<Action> {
+        
+        guard state.chapterNumber > 1 else { return .none }
+        
+        state.player.pause()
+        state.chapterNumber -= 1
+        onChapterIndexUpdate(state: &state)
+        
+        return .none
+    }
+    
+    private func handleNextChapterAction(state: inout State) -> Effect<Action> {
+        
+        guard state.chapterNumber < state.totalChapters else { return .none }
+        
+        state.player.pause()
+        state.chapterNumber += 1
+        onChapterIndexUpdate(state: &state)
+        
+        return .none
+    }
+    
+    private func onChapterIndexUpdate(state: inout State) {
+        
+        if let fileName = state.chaptersNames[safe: state.chapterNumber - 1],
+           let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
+            
+            state.player.setFile(with: url)
         }
     }
 }
@@ -135,18 +182,25 @@ extension PlayerReducer {
         
         var player: (any BookPlayer)?
         
-        if let fileName = AudioFilesNamesProvider().get.first,
+        let chapters = AudioFilesNamesProvider().get
+        
+        if let fileName = chapters.first,
            let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") {
             player = AVBookPlayer(with: url)
         } else {
             fatalError("No mp3 files found.")
         }
         
-        let store = Store(initialState: PlayerReducer.State(player: player!),
+        let store = Store(initialState: PlayerReducer.State(player: player!,
+                                                            chaptersNames: chapters),
                           reducer: { PlayerReducer() })
         
         player?.isPlayingUpdated = { [weak store] in
             store?.send(.isPlayingUpdated)
+        }
+        
+        player?.onFinish = { [weak store] in
+            store?.send(.audioControlButtonTapped(.nextChapter))
         }
         
         return store
@@ -154,4 +208,13 @@ extension PlayerReducer {
     
     /// Only for SwiftUI #Preview
     static var previewStore: StoreOf<PlayerReducer> { storeInstance }
+}
+
+// MARK: - Utils
+extension Collection {
+    
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }

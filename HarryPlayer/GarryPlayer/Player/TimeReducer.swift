@@ -40,6 +40,7 @@ struct TimeReducer {
         case timeStartUpdating
         case timeChanged(TimeInterval)
         case timeStopUpdating
+        case forceTimeRefresh
         case forceTimeUpdateOn(TimeInterval)
     }
     
@@ -58,7 +59,11 @@ struct TimeReducer {
                 state.currentTime += diff
                 state.player.currentTime = state.currentTime
                 return .none
-
+            case .forceTimeRefresh:
+                
+                state.currentTime = 0
+                state.player.currentTime = 0
+                return .none
             case .updateTime:
                 
                 if !state.isUpdatingTime, state.player.isPlaying {
