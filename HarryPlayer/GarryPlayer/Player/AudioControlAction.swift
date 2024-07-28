@@ -16,6 +16,6 @@ enum AudioControlAction: CaseIterable {
     case nextChapter
     
     static var availableFeatures: [AudioControlAction] {
-        [.goBackward, .play, .goForward]
+        AudioControlAction.allCases
     }
 }
