@@ -11,40 +11,46 @@ import ComposableArchitecture
 @Reducer
 struct SpeedReducer {
     
+    private static var speeds: [Double] { [0.5, 0.75, 1.0, 1.25, 1.5, 2.0] }
+    
     @ObservableState
     struct State: Equatable {
         
+        fileprivate var player: any BookPlayer
+
         var currentSpeed: Double = 1.0
-        fileprivate var currentSpeedIndex = 2 {
-            didSet {
-                currentSpeed = speeds[currentSpeedIndex]
-            }
+        fileprivate var currentSpeedIndex = 2
+        
+        init(player: any BookPlayer) {
+            self.player = player
         }
-        fileprivate let speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
+        
+        // Equatable
+        static func == (lhs: SpeedReducer.State, rhs: SpeedReducer.State) -> Bool {
+            lhs.currentSpeed == rhs.currentSpeed
+        }
     }
     
     enum Action {
         case speedButtonTapped
-        case setSpeed(Double)
     }
     
     @Dependency(\.continuousClock) var clock
     var body: some ReducerOf<Self> {
         
         Reduce { state, action in
-                
+            
             switch action {
             case .speedButtonTapped:
                 
-                let speedIndex = (state.currentSpeedIndex + 1) % state.speeds.count
+                let speeds = Self.speeds
+                
+                let speedIndex = (state.currentSpeedIndex + 1) % speeds.count
                 state.currentSpeedIndex = speedIndex
                 
-                let speed = state.speeds[speedIndex]
+                state.currentSpeed = speeds[speedIndex]
+                state.player.speed = state.currentSpeed
                 
-                return .run { send in
-                    await send(.setSpeed(speed))
-                }
-            case .setSpeed(_):
                 return .none
             }
         }

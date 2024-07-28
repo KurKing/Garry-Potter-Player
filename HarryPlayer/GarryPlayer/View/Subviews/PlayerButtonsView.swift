@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct PlayingButtonsView: View {
 
-    let store: StoreOf<PlayerFeature>
+    let store: StoreOf<PlayerReducer>
     
     var body: some View {
         
@@ -63,5 +63,5 @@ fileprivate extension AudioControlAction {
 }
 
 #Preview {
-    PlayingButtonsView(store: PlayerFeature.previewStore)
+    PlayingButtonsView(store: PlayerReducer.previewStore)
 }

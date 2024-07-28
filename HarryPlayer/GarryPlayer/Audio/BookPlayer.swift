@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-protocol BookPlayer: Equatable {
+protocol BookPlayer: Equatable, AnyObject {
     
     var isPlaying: Bool { get }
     

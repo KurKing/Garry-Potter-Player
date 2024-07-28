@@ -1,5 +1,5 @@
 //
-//  PlayerFeature.swift
+//  PlayerReducer.swift
 //  GarryPlayer
 //
 //  Created by Oleksii on 27.07.2024.
@@ -9,12 +9,12 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct PlayerFeature {
+struct PlayerReducer {
     
     @ObservableState
     struct State: Equatable {
         
-        @Shared fileprivate var player: any BookPlayer
+        fileprivate var player: any BookPlayer
 
         var isPlaying = false
         fileprivate var isUpdatingTime = false
@@ -30,16 +30,16 @@ struct PlayerFeature {
         var speedState: SpeedReducer.State
         
         init(player: any BookPlayer) {
-            
-            _player = Shared(wrappedValue: player, .inMemory("book.player"))
+                                    
+            self.player = player
             
             totalTime = player.duration
-            speedState = SpeedReducer.State()
+            speedState = SpeedReducer.State(player: player)
         }
         
         // Equatable
         private let id = UUID()
-        static func == (lhs: PlayerFeature.State, rhs: PlayerFeature.State) -> Bool {
+        static func == (lhs: PlayerReducer.State, rhs: PlayerReducer.State) -> Bool {
             lhs.id == rhs.id
         }
     }
@@ -68,6 +68,9 @@ struct PlayerFeature {
             Reduce { state, action in
                 
                 switch action {
+                case let .audioControlButtonTapped(action):
+                    return handleAudioControl(state: &state, action: action)
+                    
                 case let .timeChanged(time):
                     
                     state.currentTime = time
@@ -77,26 +80,7 @@ struct PlayerFeature {
                     state.currentTime = time
                     state.player.currentTime = time
                     return .none
-                case let .audioControlButtonTapped(action):
-                    
-                    if action == .play, !state.isPlaying {
-                        return .concatenate(
-                            .run { @MainActor send in
-                                while true {
-                                    try await self.clock.sleep(for: .seconds(1))
-                                    send(.updateTime)
-                                }
-                            }.cancellable(id: "onTapPlay", cancelInFlight: true),
-                            
-                            self.handleAudioControl(state: &state, action: action)
-                        )
-                    } else {
-                        return handleAudioControl(state: &state, action: action)
-                    }
-                case let .speed(.setSpeed(speed)):
-                    
-                    state.player.speed = speed
-                    return .none
+
                 case .updateTime:
                     
                     if !state.isUpdatingTime, state.isPlaying {
@@ -107,6 +91,7 @@ struct PlayerFeature {
                     
                     state.isUpdatingTime = true
                     state.wasPlayingOnTimeUpdate = state.isPlaying
+                    
                     state.player.pause()
                     state.isPlaying = state.player.isPlaying
                     
@@ -116,6 +101,7 @@ struct PlayerFeature {
                     state.player.currentTime = state.currentTime
                     
                     if state.wasPlayingOnTimeUpdate {
+                        
                         state.player.play()
                         state.isPlaying = state.player.isPlaying
                     }
@@ -129,9 +115,32 @@ struct PlayerFeature {
             }
         }
     }
+}
+
+// MARK: - Audio control
+private extension PlayerReducer {
     
-    private func handleAudioControl(state: inout State,
-                                    action: AudioControlAction) -> Effect<Action> {
+    func handleAudioControl(state: inout State,
+                            action: AudioControlAction) -> Effect<Action> {
+        
+        if action == .play, !state.isPlaying {
+            return .concatenate(
+                .run { @MainActor send in
+                    while true {
+                        try await self.clock.sleep(for: .seconds(1))
+                        send(.updateTime)
+                    }
+                }.cancellable(id: "onTapPlay", cancelInFlight: true),
+                
+                self.handleAudioControlInternal(state: &state, action: action)
+            )
+        } else {
+            return handleAudioControlInternal(state: &state, action: action)
+        }
+    }
+    
+    private func handleAudioControlInternal(state: inout State,
+                                            action: AudioControlAction) -> Effect<Action> {
         
         let currentTime = state.currentTime
         
@@ -160,9 +169,10 @@ struct PlayerFeature {
     }
 }
 
-extension PlayerFeature {
+// MARK: - Instantiate
+extension PlayerReducer {
     
-    static var storeInstance: StoreOf<PlayerFeature> {
+    static var storeInstance: StoreOf<PlayerReducer> {
         
         var player: (any BookPlayer)?
         
@@ -173,10 +183,10 @@ extension PlayerFeature {
             fatalError("No mp3 files found.")
         }
         
-        return Store(initialState: PlayerFeature.State(player: player!),
-              reducer: { PlayerFeature() })
+        return Store(initialState: PlayerReducer.State(player: player!),
+              reducer: { PlayerReducer() })
     }
     
     /// Only for SwiftUI #Preview
-    static var previewStore: StoreOf<PlayerFeature> { storeInstance }
+    static var previewStore: StoreOf<PlayerReducer> { storeInstance }
 }
