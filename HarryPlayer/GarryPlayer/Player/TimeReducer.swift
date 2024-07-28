@@ -40,7 +40,7 @@ struct TimeReducer {
         case timeStartUpdating
         case timeChanged(TimeInterval)
         case timeStopUpdating
-        case forceTimeUpdate(TimeInterval)
+        case forceTimeUpdateOn(TimeInterval)
     }
     
     @Dependency(\.continuousClock) var clock
@@ -53,10 +53,10 @@ struct TimeReducer {
                 
                 state.currentTime = time
                 return .none
-            case let .forceTimeUpdate(time):
+            case let .forceTimeUpdateOn(diff):
                 
-                state.currentTime = time
-                state.player.currentTime = time
+                state.currentTime += diff
+                state.player.currentTime = state.currentTime
                 return .none
 
             case .updateTime:

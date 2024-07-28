@@ -103,9 +103,6 @@ private extension PlayerReducer {
     
     private func handleAudioControlInternal(state: inout State,
                                             action: AudioControlAction) -> Effect<Action> {
-        
-        let currentTime = state.timeState.currentTime
-        
         switch action {
         case .play:
             
@@ -117,11 +114,11 @@ private extension PlayerReducer {
             return .none
         case .goBackward:
             return .run { send in
-                await send(.time(.forceTimeUpdate(currentTime - 5)))
+                await send(.time(.forceTimeUpdateOn(-5)))
             }
         case .goForward:
             return .run { send in
-                await send(.time(.forceTimeUpdate(currentTime + 10)))
+                await send(.time(.forceTimeUpdateOn(10)))
             }
         case .previousChapter:
             return .none
