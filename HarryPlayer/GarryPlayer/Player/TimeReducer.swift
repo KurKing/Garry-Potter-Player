@@ -63,6 +63,7 @@ struct TimeReducer {
                 
                 state.currentTime = 0
                 state.player.currentTime = 0
+                state.totalTime = state.player.duration
                 return .none
             case .updateTime:
                 

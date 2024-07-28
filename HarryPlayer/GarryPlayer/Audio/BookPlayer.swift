@@ -61,6 +61,7 @@ class AVBookPlayer: NSObject, BookPlayer {
         
         super.init()
         
+        player?.delegate = self
         fixSpeakers()
     }
     
@@ -83,6 +84,7 @@ class AVBookPlayer: NSObject, BookPlayer {
         player = nil
         player = try? AVAudioPlayer(contentsOf: url)
         player?.enableRate = true
+        player?.delegate = self
         
         fixSpeakers()
         
@@ -106,7 +108,6 @@ extension AVBookPlayer: AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, 
                                      successfully flag: Bool) {
-        player.stop()
         isPlayingUpdated?()
         onFinish?()
     }
