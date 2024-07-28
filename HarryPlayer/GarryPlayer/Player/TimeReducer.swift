@@ -17,6 +17,9 @@ struct TimeReducer {
         var currentTime: TimeInterval = 0
         var totalTime: TimeInterval = 0
         
+        var isTimeBackButtonAvailable: Bool { currentTime >= 5  }
+        var isTimeForwardButtonAvailable: Bool { currentTime < totalTime - 10 }
+        
         fileprivate var player: any BookPlayer
         fileprivate var isUpdatingTime = false
         fileprivate var wasPlayingOnTimeUpdate = false
@@ -56,7 +59,15 @@ struct TimeReducer {
                 return .none
             case let .forceTimeUpdateOn(diff):
                 
-                state.currentTime += diff
+                var time = state.currentTime + diff
+                
+                if time < 0 {
+                    time = 0
+                } else if time > state.totalTime {
+                    time = state.totalTime
+                }
+                
+                state.currentTime = time
                 state.player.currentTime = state.currentTime
                 return .none
 
