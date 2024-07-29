@@ -1,0 +1,730 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		495C458D2C5631270017D8DC /* SpeedReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C458C2C5631270017D8DC /* SpeedReducer.swift */; };
+		495C458F2C5673880017D8DC /* TimeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C458E2C5673880017D8DC /* TimeReducer.swift */; };
+		495C45912C5683060017D8DC /* Chapter_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 495C45902C5683060017D8DC /* Chapter_2.mp3 */; };
+		495C45932C56830C0017D8DC /* Chapter_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 495C45922C56830C0017D8DC /* Chapter_3.mp3 */; };
+		495C45952C56C6860017D8DC /* MockBookPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C45942C56C6860017D8DC /* MockBookPlayer.swift */; };
+		495C45972C56C7710017D8DC /* SpeedReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C45962C56C7710017D8DC /* SpeedReducerTests.swift */; };
+		495C45992C56CBA80017D8DC /* TimeReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495C45982C56CBA80017D8DC /* TimeReducerTests.swift */; };
+		49618CFC2C5503D7005622C8 /* BookPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49618CFB2C5503D7005622C8 /* BookPlayer.swift */; };
+		49BD0A122C54E084005F837E /* GarryPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A112C54E084005F837E /* GarryPlayerApp.swift */; };
+		49BD0A142C54E084005F837E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A132C54E084005F837E /* ContentView.swift */; };
+		49BD0A162C54E086005F837E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49BD0A152C54E086005F837E /* Assets.xcassets */; };
+		49BD0A192C54E086005F837E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49BD0A182C54E086005F837E /* Preview Assets.xcassets */; };
+		49BD0A2D2C54E086005F837E /* GarryPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A2C2C54E086005F837E /* GarryPlayerUITests.swift */; };
+		49BD0A2F2C54E086005F837E /* GarryPlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A2E2C54E086005F837E /* GarryPlayerUITestsLaunchTests.swift */; };
+		49BD0A3C2C54E414005F837E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49BD0A3B2C54E414005F837E /* Launch Screen.storyboard */; };
+		49BD0A422C54E8AD005F837E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 49BD0A412C54E8AD005F837E /* ComposableArchitecture */; };
+		49BD0A442C54E932005F837E /* PlayerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A432C54E932005F837E /* PlayerReducer.swift */; };
+		49BD0A462C54EA4C005F837E /* BookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A452C54EA4C005F837E /* BookCoverView.swift */; };
+		49BD0A482C54EC35005F837E /* TimeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A472C54EC35005F837E /* TimeSliderView.swift */; };
+		49BD0A4A2C54F189005F837E /* AudioControlAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A492C54F189005F837E /* AudioControlAction.swift */; };
+		49BD0A4C2C54F1AC005F837E /* PlayerButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A4B2C54F1AC005F837E /* PlayerButtonsView.swift */; };
+		49BD0A4E2C54F2F3005F837E /* SpeedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A4D2C54F2F3005F837E /* SpeedButtonView.swift */; };
+		49BD0A512C54FA3A005F837E /* Chapter_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 49BD0A502C54FA3A005F837E /* Chapter_1.mp3 */; };
+		49BD0A532C54FAFA005F837E /* AudioFilesNamesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD0A522C54FAFA005F837E /* AudioFilesNamesProvider.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49BD0A1F2C54E086005F837E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49BD0A062C54E084005F837E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49BD0A0D2C54E084005F837E;
+			remoteInfo = GarryPlayer;
+		};
+		49BD0A292C54E086005F837E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49BD0A062C54E084005F837E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49BD0A0D2C54E084005F837E;
+			remoteInfo = GarryPlayer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		495C458C2C5631270017D8DC /* SpeedReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedReducer.swift; sourceTree = "<group>"; };
+		495C458E2C5673880017D8DC /* TimeReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeReducer.swift; sourceTree = "<group>"; };
+		495C45902C5683060017D8DC /* Chapter_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chapter_2.mp3; sourceTree = "<group>"; };
+		495C45922C56830C0017D8DC /* Chapter_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chapter_3.mp3; sourceTree = "<group>"; };
+		495C45942C56C6860017D8DC /* MockBookPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBookPlayer.swift; sourceTree = "<group>"; };
+		495C45962C56C7710017D8DC /* SpeedReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedReducerTests.swift; sourceTree = "<group>"; };
+		495C45982C56CBA80017D8DC /* TimeReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeReducerTests.swift; sourceTree = "<group>"; };
+		49618CFB2C5503D7005622C8 /* BookPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPlayer.swift; sourceTree = "<group>"; };
+		49BD0A0E2C54E084005F837E /* GarryPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GarryPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49BD0A112C54E084005F837E /* GarryPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarryPlayerApp.swift; sourceTree = "<group>"; };
+		49BD0A132C54E084005F837E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		49BD0A152C54E086005F837E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49BD0A182C54E086005F837E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		49BD0A1E2C54E086005F837E /* GarryPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GarryPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49BD0A282C54E086005F837E /* GarryPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GarryPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49BD0A2C2C54E086005F837E /* GarryPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarryPlayerUITests.swift; sourceTree = "<group>"; };
+		49BD0A2E2C54E086005F837E /* GarryPlayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarryPlayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		49BD0A3B2C54E414005F837E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		49BD0A432C54E932005F837E /* PlayerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerReducer.swift; sourceTree = "<group>"; };
+		49BD0A452C54EA4C005F837E /* BookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverView.swift; sourceTree = "<group>"; };
+		49BD0A472C54EC35005F837E /* TimeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSliderView.swift; sourceTree = "<group>"; };
+		49BD0A492C54F189005F837E /* AudioControlAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioControlAction.swift; sourceTree = "<group>"; };
+		49BD0A4B2C54F1AC005F837E /* PlayerButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButtonsView.swift; sourceTree = "<group>"; };
+		49BD0A4D2C54F2F3005F837E /* SpeedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedButtonView.swift; sourceTree = "<group>"; };
+		49BD0A502C54FA3A005F837E /* Chapter_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chapter_1.mp3; sourceTree = "<group>"; };
+		49BD0A522C54FAFA005F837E /* AudioFilesNamesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFilesNamesProvider.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49BD0A0B2C54E084005F837E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49BD0A422C54E8AD005F837E /* ComposableArchitecture in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A1B2C54E086005F837E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A252C54E086005F837E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49BD0A052C54E084005F837E = {
+			isa = PBXGroup;
+			children = (
+				49BD0A102C54E084005F837E /* GarryPlayer */,
+				49BD0A212C54E086005F837E /* GarryPlayerTests */,
+				49BD0A2B2C54E086005F837E /* GarryPlayerUITests */,
+				49BD0A0F2C54E084005F837E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49BD0A0F2C54E084005F837E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A0E2C54E084005F837E /* GarryPlayer.app */,
+				49BD0A1E2C54E086005F837E /* GarryPlayerTests.xctest */,
+				49BD0A282C54E086005F837E /* GarryPlayerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49BD0A102C54E084005F837E /* GarryPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A112C54E084005F837E /* GarryPlayerApp.swift */,
+				49BD0A3F2C54E884005F837E /* Player */,
+				49BD0A3D2C54E872005F837E /* View */,
+				49BD0A4F2C54FA1F005F837E /* Audio */,
+				49BD0A152C54E086005F837E /* Assets.xcassets */,
+				49BD0A3B2C54E414005F837E /* Launch Screen.storyboard */,
+				49BD0A172C54E086005F837E /* Preview Content */,
+			);
+			path = GarryPlayer;
+			sourceTree = "<group>";
+		};
+		49BD0A172C54E086005F837E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A182C54E086005F837E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		49BD0A212C54E086005F837E /* GarryPlayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				495C45942C56C6860017D8DC /* MockBookPlayer.swift */,
+				495C45962C56C7710017D8DC /* SpeedReducerTests.swift */,
+				495C45982C56CBA80017D8DC /* TimeReducerTests.swift */,
+			);
+			path = GarryPlayerTests;
+			sourceTree = "<group>";
+		};
+		49BD0A2B2C54E086005F837E /* GarryPlayerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A2C2C54E086005F837E /* GarryPlayerUITests.swift */,
+				49BD0A2E2C54E086005F837E /* GarryPlayerUITestsLaunchTests.swift */,
+			);
+			path = GarryPlayerUITests;
+			sourceTree = "<group>";
+		};
+		49BD0A3D2C54E872005F837E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A132C54E084005F837E /* ContentView.swift */,
+				49BD0A3E2C54E877005F837E /* Subviews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		49BD0A3E2C54E877005F837E /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A452C54EA4C005F837E /* BookCoverView.swift */,
+				49BD0A472C54EC35005F837E /* TimeSliderView.swift */,
+				49BD0A4D2C54F2F3005F837E /* SpeedButtonView.swift */,
+				49BD0A4B2C54F1AC005F837E /* PlayerButtonsView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		49BD0A3F2C54E884005F837E /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A432C54E932005F837E /* PlayerReducer.swift */,
+				495C458C2C5631270017D8DC /* SpeedReducer.swift */,
+				495C458E2C5673880017D8DC /* TimeReducer.swift */,
+				49BD0A492C54F189005F837E /* AudioControlAction.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		49BD0A4F2C54FA1F005F837E /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				49BD0A522C54FAFA005F837E /* AudioFilesNamesProvider.swift */,
+				49618CFB2C5503D7005622C8 /* BookPlayer.swift */,
+				49BD0A502C54FA3A005F837E /* Chapter_1.mp3 */,
+				495C45902C5683060017D8DC /* Chapter_2.mp3 */,
+				495C45922C56830C0017D8DC /* Chapter_3.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49BD0A0D2C54E084005F837E /* GarryPlayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49BD0A322C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayer" */;
+			buildPhases = (
+				49BD0A0A2C54E084005F837E /* Sources */,
+				49BD0A0B2C54E084005F837E /* Frameworks */,
+				49BD0A0C2C54E084005F837E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GarryPlayer;
+			packageProductDependencies = (
+				49BD0A412C54E8AD005F837E /* ComposableArchitecture */,
+			);
+			productName = GarryPlayer;
+			productReference = 49BD0A0E2C54E084005F837E /* GarryPlayer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		49BD0A1D2C54E086005F837E /* GarryPlayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49BD0A352C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayerTests" */;
+			buildPhases = (
+				49BD0A1A2C54E086005F837E /* Sources */,
+				49BD0A1B2C54E086005F837E /* Frameworks */,
+				49BD0A1C2C54E086005F837E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49BD0A202C54E086005F837E /* PBXTargetDependency */,
+			);
+			name = GarryPlayerTests;
+			productName = GarryPlayerTests;
+			productReference = 49BD0A1E2C54E086005F837E /* GarryPlayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		49BD0A272C54E086005F837E /* GarryPlayerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49BD0A382C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayerUITests" */;
+			buildPhases = (
+				49BD0A242C54E086005F837E /* Sources */,
+				49BD0A252C54E086005F837E /* Frameworks */,
+				49BD0A262C54E086005F837E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49BD0A2A2C54E086005F837E /* PBXTargetDependency */,
+			);
+			name = GarryPlayerUITests;
+			productName = GarryPlayerUITests;
+			productReference = 49BD0A282C54E086005F837E /* GarryPlayerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49BD0A062C54E084005F837E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					49BD0A0D2C54E084005F837E = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					49BD0A1D2C54E086005F837E = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 49BD0A0D2C54E084005F837E;
+					};
+					49BD0A272C54E086005F837E = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 49BD0A0D2C54E084005F837E;
+					};
+				};
+			};
+			buildConfigurationList = 49BD0A092C54E084005F837E /* Build configuration list for PBXProject "GarryPlayer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49BD0A052C54E084005F837E;
+			packageReferences = (
+				49BD0A402C54E8AD005F837E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
+			productRefGroup = 49BD0A0F2C54E084005F837E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49BD0A0D2C54E084005F837E /* GarryPlayer */,
+				49BD0A1D2C54E086005F837E /* GarryPlayerTests */,
+				49BD0A272C54E086005F837E /* GarryPlayerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49BD0A0C2C54E084005F837E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495C45932C56830C0017D8DC /* Chapter_3.mp3 in Resources */,
+				49BD0A3C2C54E414005F837E /* Launch Screen.storyboard in Resources */,
+				49BD0A192C54E086005F837E /* Preview Assets.xcassets in Resources */,
+				495C45912C5683060017D8DC /* Chapter_2.mp3 in Resources */,
+				49BD0A512C54FA3A005F837E /* Chapter_1.mp3 in Resources */,
+				49BD0A162C54E086005F837E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A1C2C54E086005F837E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A262C54E086005F837E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49BD0A0A2C54E084005F837E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49BD0A4E2C54F2F3005F837E /* SpeedButtonView.swift in Sources */,
+				495C458F2C5673880017D8DC /* TimeReducer.swift in Sources */,
+				49BD0A142C54E084005F837E /* ContentView.swift in Sources */,
+				49BD0A482C54EC35005F837E /* TimeSliderView.swift in Sources */,
+				49BD0A4A2C54F189005F837E /* AudioControlAction.swift in Sources */,
+				495C458D2C5631270017D8DC /* SpeedReducer.swift in Sources */,
+				49BD0A122C54E084005F837E /* GarryPlayerApp.swift in Sources */,
+				49BD0A442C54E932005F837E /* PlayerReducer.swift in Sources */,
+				49BD0A4C2C54F1AC005F837E /* PlayerButtonsView.swift in Sources */,
+				49618CFC2C5503D7005622C8 /* BookPlayer.swift in Sources */,
+				49BD0A462C54EA4C005F837E /* BookCoverView.swift in Sources */,
+				49BD0A532C54FAFA005F837E /* AudioFilesNamesProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A1A2C54E086005F837E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495C45972C56C7710017D8DC /* SpeedReducerTests.swift in Sources */,
+				495C45992C56CBA80017D8DC /* TimeReducerTests.swift in Sources */,
+				495C45952C56C6860017D8DC /* MockBookPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49BD0A242C54E086005F837E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49BD0A2D2C54E086005F837E /* GarryPlayerUITests.swift in Sources */,
+				49BD0A2F2C54E086005F837E /* GarryPlayerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49BD0A202C54E086005F837E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49BD0A0D2C54E084005F837E /* GarryPlayer */;
+			targetProxy = 49BD0A1F2C54E086005F837E /* PBXContainerItemProxy */;
+		};
+		49BD0A2A2C54E086005F837E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49BD0A0D2C54E084005F837E /* GarryPlayer */;
+			targetProxy = 49BD0A292C54E086005F837E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		49BD0A302C54E086005F837E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49BD0A312C54E086005F837E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49BD0A332C54E086005F837E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GarryPlayer/Preview Content\"";
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Harry Reader";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		49BD0A342C54E086005F837E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GarryPlayer/Preview Content\"";
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Harry Reader";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		49BD0A362C54E086005F837E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GarryPlayer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GarryPlayer";
+			};
+			name = Debug;
+		};
+		49BD0A372C54E086005F837E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GarryPlayer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GarryPlayer";
+			};
+			name = Release;
+		};
+		49BD0A392C54E086005F837E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GarryPlayer;
+			};
+			name = Debug;
+		};
+		49BD0A3A2C54E086005F837E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CUJ73BXL42;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kurking.GarryPlayerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GarryPlayer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49BD0A092C54E084005F837E /* Build configuration list for PBXProject "GarryPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49BD0A302C54E086005F837E /* Debug */,
+				49BD0A312C54E086005F837E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49BD0A322C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49BD0A332C54E086005F837E /* Debug */,
+				49BD0A342C54E086005F837E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49BD0A352C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49BD0A362C54E086005F837E /* Debug */,
+				49BD0A372C54E086005F837E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49BD0A382C54E086005F837E /* Build configuration list for PBXNativeTarget "GarryPlayerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49BD0A392C54E086005F837E /* Debug */,
+				49BD0A3A2C54E086005F837E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		49BD0A402C54E8AD005F837E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49BD0A412C54E8AD005F837E /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49BD0A402C54E8AD005F837E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 49BD0A062C54E084005F837E /* Project object */;
+}
